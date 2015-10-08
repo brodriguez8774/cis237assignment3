@@ -93,6 +93,8 @@ It may be benificial for you to create extra methods within the droid sub classe
 
 ## Outside Resources Used
 
-
+https://msdn.microsoft.com/en-us/library/ah19swz4.aspx
+https://msdn.microsoft.com/en-us/library/aa288471%28v=vs.71%29.aspx
+* Structs for ease of organization.
 
 ## Known Problems, Issues, And/Or Errors in the Program

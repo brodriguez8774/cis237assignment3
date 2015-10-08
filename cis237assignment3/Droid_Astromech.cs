@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Brandon Rodriguez
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -78,9 +80,22 @@ namespace cis237assignment3
             base.CalculateTotalCost();
         }
 
-        public override string DisplayToString()
+        /// <summary>
+        /// Shortened string for displaying of many droids, each in single line format.
+        /// </summary>
+        /// <returns>String of short Droid information.</returns>
+        public override string DisplayShortToString()
         {
-            return base.DisplayToString() + Environment.NewLine +
+            return "Astromech Droid: " + totalCostDecimal.ToString().PadLeft(10);
+        }
+
+        /// <summary>
+        /// Full string for displaying of single droid spanning multiple lines.
+        /// </summary>
+        /// <returns>String of full Droid information.</returns>
+        public override string DisplayFullToString()
+        {
+            return base.DisplayFullToString() + Environment.NewLine +
                 "Fire Extinguisher: " + YesNoString(hasFireExtinguisherBool) + Environment.NewLine;
         }
 

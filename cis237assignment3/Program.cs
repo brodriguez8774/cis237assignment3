@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Brandon Rodriguez
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +10,13 @@ namespace cis237assignment3
 {
     class Program
     {
+        /// <summary>
+        /// Main.
+        /// </summary>
+        /// <param name="args">Command-line args.</param>
         static void Main(string[] args)
         {
+            RunProgram run = new RunProgram();
         }
     }
 }

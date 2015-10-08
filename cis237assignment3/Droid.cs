@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Brandon Rodriguez
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,18 +9,19 @@ using System.Threading.Tasks;
 namespace cis237assignment3
 {
     /// <summary>
-    /// Abstract class for Droids.
+    /// Abstract class for Droids. Handles "higher level" thinking/rules.
     /// Derives from IDroid interface.
     /// </summary>
     abstract class Droid : IDroid
     {
         #region Variables
 
-        public string materialString;
-        public string modelString;
-        public string colorString;
-        public decimal baseCostDecimal;
-        public decimal totalCostDecimal;
+        protected string materialString;
+        protected string modelString;
+        protected string colorString;
+        protected decimal baseCostDecimal;
+        protected decimal totalCostDecimal;
+        protected decimal costPerFeature;       // Standard cost per most features.
 
         #endregion
 
@@ -45,8 +48,6 @@ namespace cis237assignment3
             Material = material;
             Model = model;
             Color = color;
-
-            baseCostDecimal = 10m;
         }
 
         #endregion
@@ -89,11 +90,29 @@ namespace cis237assignment3
 
 
 
-        #region Methods
+        #region Protected Methods
+
+        
+
+        #endregion
+
+
+
+        #region Public Methods
 
         public abstract void CalculateTotalCost();
 
-        public virtual string DisplayToString()
+        /// <summary>
+        /// Shortened string for displaying of many droids, each in single line format.
+        /// </summary>
+        /// <returns>String of short Droid information.</returns>
+        public abstract string DisplayShortToString();
+
+        /// <summary>
+        /// Full string for displaying of single droid spanning multiple lines.
+        /// </summary>
+        /// <returns>String of full Droid information.</returns>
+        public virtual string DisplayFullToString()
         {
             return materialString + " " + modelString + " : " + colorString;
         }

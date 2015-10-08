@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Brandon Rodriguez
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,8 +17,8 @@ namespace cis237assignment3
         #region Variables
 
         protected int numberOfLanguagesInt;
-
         protected const decimal COST_PER_LANGUAGE = 1;        // Temp cost placeholder.
+        protected decimal totalLanguageDecimal;
 
         #endregion
 
@@ -57,20 +59,53 @@ namespace cis237assignment3
             get { return numberOfLanguagesInt; }
         }
 
+        public decimal TotalLanguageCost
+        {
+            get { return numberOfLanguagesInt; }
+        }
+
         #endregion
 
 
 
-        #region Methods
+        #region Private Methods
+
+        /// <summary>
+        /// Determines total language cost for droid.
+        /// </summary>
+        private void CalculateLanguageCost()
+        {
+            totalLanguageDecimal = numberOfLanguagesInt * COST_PER_LANGUAGE;
+        }
+
+        #endregion
+
+
+
+
+        #region Public Methods
 
         public override void CalculateTotalCost()
         {
             throw new NotImplementedException();
         }
 
-        public override string DisplayToString()
+        /// <summary>
+        /// Shortened string for displaying of many droids, each in single line format.
+        /// </summary>
+        /// <returns>String of short Droid information.</returns>
+        public override string DisplayShortToString()
         {
-            return base.DisplayToString() + Environment.NewLine +
+            return "Protocol Droid: " + totalCostDecimal.ToString().PadLeft(10);
+        }
+
+        /// <summary>
+        /// Full string for displaying of single droid spanning multiple lines.
+        /// </summary>
+        /// <returns>String of full Droid information.</returns>
+        public override string DisplayFullToString()
+        {
+            return base.DisplayFullToString() + Environment.NewLine +
                 "Languages: " + numberOfLanguagesInt;
         }
 
