@@ -18,11 +18,11 @@ namespace cis237assignment3
         // All the necessary variables for material selection.
         private string selectedMaterialString;
         private decimal selectedMaterialDecimal;
-        public static const string MATERIAL_1_STRING = "Tin";
-        public static const string MATERIAL_2_STRING = "Steel";
-        public static const string MATERIAL_3_STRING = "Titanium";
-        public static const string MATERIAL_4_STRING = "Mythril";
-        public static const string MATERIAL_5_STRING = "Unobtanium";
+        public static string MATERIAL_1_STRING = "Tin";
+        public static string MATERIAL_2_STRING = "Steel";
+        public static string MATERIAL_3_STRING = "Titanium";
+        public static string MATERIAL_4_STRING = "Mythril";
+        public static string MATERIAL_5_STRING = "Unobtanium";
         private decimal material1Decimal;
         private decimal material2Decimal;
         private decimal material3Decimal;
@@ -32,19 +32,19 @@ namespace cis237assignment3
         // All the necessary variables for model selection.
         protected string selectedModelString;
         protected decimal selectedModelDecimal;
-        public static const string MODEL_1_STRING = "TI-84";
-        public static const string MODEL_2_STRING = "TI-84";
+        public static string MODEL_1_STRING = "TI-84";
+        public static string MODEL_2_STRING = "TI-84";
         private decimal model1Decimal;
         private decimal model2Decimal;
 
         // All the necessary variables for color selection.
         private string selectedColorString;
         private decimal selectedColorDecimal;
-        public static const string COLOR_1_STRING = "White";
-        public static const string COLOR_2_STRING = "Black";
-        public static const string COLOR_3_STRING = "Blue";
-        public static const string COLOR_4_STRING = "Red";
-        public static const string COLOR_5_STRING = "Green";
+        public static string COLOR_1_STRING = "White";
+        public static string COLOR_2_STRING = "Black";
+        public static string COLOR_3_STRING = "Blue";
+        public static string COLOR_4_STRING = "Red";
+        public static string COLOR_5_STRING = "Green";
         private decimal color1Decimal;
         private decimal color2Decimal;
         private decimal color3Decimal;
@@ -97,7 +97,7 @@ namespace cis237assignment3
         #region Private Methods
 
         
-
+        /* EXTRA FUNCTIONALITY. WORK ON LAST.
         /// <summary>
         /// Sets a clearance int for the program. This is the permanent discount for all items on clearance.
         /// </summary>
@@ -257,6 +257,8 @@ namespace cis237assignment3
                 color5Decimal = baseColorCost + AddCents();
             }
         }
+         * 
+         * */
 
         #endregion
 
@@ -282,7 +284,12 @@ namespace cis237assignment3
 
         public override void CalculateTotalCost()
         {
-            throw new NotImplementedException();
+            totalCostDecimal = selectedModelDecimal + selectedMaterialDecimal + selectedColorDecimal;
+        }
+
+        public override string DisplayShortToString()
+        {
+            return "aaa";
         }
 
         #endregion

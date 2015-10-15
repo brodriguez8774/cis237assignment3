@@ -11,12 +11,18 @@ namespace cis237assignment3
     /// <summary>
     /// Handles all display to user and reading of user input.
     /// Having one class handle everything UI helps create consistency.
+    /// 
+    /// Note: Having the interface methods accept parameters instead of directly calling static variables prevents the
+    /// interface from having to directly access multiple classes itself. Only RunProgram will access multiple classes
+    /// due to it being the "binding" between all the classes.
+    /// 
+    /// Instead, Interface just tells RunProgram what it needs to work and never deals directly with other classes.
     /// </summary>
     static class UserInterface
     {
         #region Variables
 
-
+        private static string userInputString;
 
         #endregion
 
@@ -40,7 +46,35 @@ namespace cis237assignment3
 
         #region Private Methods
 
+        /// <summary>
+        /// Sets cursor position for menus.
+        /// </summary>
+        private static void SetMenuCursor()
+        {
+            Console.SetCursorPosition(0, 1);
+        }
 
+        private static void ResetMenuDisplay()
+        {
+            // Section to remove everything currently displayed.
+            SetMenuCursor();
+            Console.WriteLine(
+                "".PadRight(Console.WindowWidth - 1) + Environment.NewLine +
+                "".PadRight(Console.WindowWidth - 1) + Environment.NewLine +
+                "".PadRight(Console.WindowWidth - 1) + Environment.NewLine +
+                "".PadRight(Console.WindowWidth - 1) + Environment.NewLine +
+                "".PadRight(Console.WindowWidth - 1) + Environment.NewLine +
+                "".PadRight(Console.WindowWidth - 1) + Environment.NewLine +
+                "".PadRight(Console.WindowWidth - 1) + Environment.NewLine);
+
+            // Section to add back "esc to go back" display section.
+            // Recreated each time incase a menu string at some point is too long and writes over it.
+            SetMenuCursor();
+            Console.WriteLine("Type 'esc' at any point to exit out. ".PadLeft(Console.WindowWidth - 1));
+
+            // Sets cursor for new menu to actually display.
+            SetMenuCursor();
+        }
 
         #endregion
 
@@ -54,13 +88,36 @@ namespace cis237assignment3
         /// <returns>String of user's input.</returns>
         public static string GetUserInput()
         {
-            return Console.ReadLine().Trim().ToLower();
+            Console.SetCursorPosition(1, 9);
+
+            userInputString = Console.ReadLine().Trim().ToLower();
+            
+            // Removing of user input after recieving it.
+            Console.SetCursorPosition(0, 9);
+            Console.WriteLine("".PadRight(Console.WindowWidth - 1));
+
+            return userInputString;
         }
 
 
         public static void DisplayLine(string displayString)
         {
             Console.WriteLine(displayString);
+        }
+
+
+        public static void DisplayError(string displayString)
+        {
+            Console.SetCursorPosition(1, 8);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(displayString.PadRight(Console.WindowWidth - 1));
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        public static void ClearDisplayLine()
+        {
+
         }
 
         /// <summary>
@@ -73,6 +130,8 @@ namespace cis237assignment3
             /// </summary>
             public static void DisplayMainMenu()
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Select an option: " + Environment.NewLine +
                     "" + Environment.NewLine +
@@ -82,8 +141,13 @@ namespace cis237assignment3
                     "   4) Exit");
             }
 
+            /// <summary>
+            /// Displays droid Type selection to user.
+            /// </summary>
             public static void DisplayTypeSelectionMenu()
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Select a Droid Type: " + Environment.NewLine +
                     "" + Environment.NewLine +
@@ -93,8 +157,15 @@ namespace cis237assignment3
                     "   4) Astromech Droid" + Environment.NewLine);
             }
 
+            /// <summary>
+            /// Displays droid Model selection to user.
+            /// </summary>
+            /// <param name="model1">Droid Model 1.</param>
+            /// <param name="model2">Droid Model 2.</param>
             public static void DisplayModelSelectionMenu(string model1, string model2)
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Select a Droid Model: " + Environment.NewLine +
                     "" + Environment.NewLine +
@@ -102,8 +173,18 @@ namespace cis237assignment3
                     "   2) " + model2 + Environment.NewLine);
             }
 
+            /// <summary>
+            /// Displays droid Material selection to user.
+            /// </summary>
+            /// <param name="material1">Droid Material 1.</param>
+            /// <param name="material2">Droid Material 2.</param>
+            /// <param name="material3">Droid Material 3.</param>
+            /// <param name="material4">Droid Material 4.</param>
+            /// <param name="material5">Droid Material 5.</param>
             public static void DisplayMaterialSelectionMenu(string material1, string material2, string material3, string material4, string material5)
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Select a Droid Material: " + Environment.NewLine +
                     "" + Environment.NewLine +
@@ -114,8 +195,18 @@ namespace cis237assignment3
                     "   5) " + material5 + Environment.NewLine);
             }
 
+            /// <summary>
+            /// Displays droid Color selection to user.
+            /// </summary>
+            /// <param name="color1">Droid Color 1.</param>
+            /// <param name="color2">Droid Color 2.</param>
+            /// <param name="color3">Droid Color 3.</param>
+            /// <param name="color4">Droid Color 4.</param>
+            /// <param name="color5">Droid Color 5.</param>
             public static void DisplayColorSelectionMenu(string color1, string color2, string color3, string color4, string color5)
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Select a Droid Color: " + Environment.NewLine +
                     "" + Environment.NewLine +
@@ -126,19 +217,33 @@ namespace cis237assignment3
                     "   5) " + color5 + Environment.NewLine);
             }
 
-            public static void DisplayLanguageSelectionMenu()
+            /// <summary>
+            /// Displays droid Language selection to user.
+            /// </summary>
+            /// <param name="langSelection1">Droid Language 1.</param>
+            /// <param name="langSelection2">Droid Language 2.</param>
+            /// <param name="langSelection3">Droid Language 3.</param>
+            /// <param name="langSelection4">Droid Language 4.</param>
+            public static void DisplayLanguageSelectionMenu(int langSelection1, int langSelection2, int langSelection3, int langSelection4)
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Select number of Built in Languages: " + Environment.NewLine +
                     "" + Environment.NewLine +
-                    "   1) 1" + Environment.NewLine +
-                    "   2) 3" + Environment.NewLine +
-                    "   3) 7" + Environment.NewLine +
-                    "   4) 12" + Environment.NewLine);
+                    "   1) " + langSelection1 + Environment.NewLine +
+                    "   2) " + langSelection2 + Environment.NewLine +
+                    "   3) " + langSelection3 + Environment.NewLine +
+                    "   4) " + langSelection4 + Environment.NewLine);
             }
 
+            /// <summary>
+            /// Displays droid Tool Box selection to user.
+            /// </summary>
             public static void DisplayToolBoxSelectionMenu()
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Add Toolbox Functionality? " + Environment.NewLine +
                     "" + Environment.NewLine +
@@ -146,17 +251,27 @@ namespace cis237assignment3
                     "   2) No" +Environment.NewLine);
             }
 
+            /// <summary>
+            /// Displays droid Computer Connection selection to user.
+            /// </summary>
             public static void DisplayComputerConnectionSelectionMenu()
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
-                    "   Add Computer Connection Functionality? " + Environment.NewLine +
+                    "   Add Network Functionality? " + Environment.NewLine +
                     "" + Environment.NewLine +
                     "   1) Yes" + Environment.NewLine +
                     "   2) No" + Environment.NewLine);
             }
 
+            /// <summary>
+            /// Displays droid Arm selection to user.
+            /// </summary>
             public static void DisplayArmSelectionMenu()
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Add Mechanical Arm Functionality? " + Environment.NewLine +
                     "" + Environment.NewLine +
@@ -164,8 +279,13 @@ namespace cis237assignment3
                     "   2) No" + Environment.NewLine);
             }
 
+            /// <summary>
+            /// Displays droid Color selection to user.
+            /// </summary>
             public static void DisplayTrashCompactorSelectionMenu()
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Add Trash Compactor Functionality? " + Environment.NewLine +
                     "" + Environment.NewLine +
@@ -173,8 +293,13 @@ namespace cis237assignment3
                     "   2) No" + Environment.NewLine);
             }
 
+            /// <summary>
+            /// Displays droid Vacuum selection to user.
+            /// </summary>
             public static void DisplayVacuumSelectionMenu()
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Add Vacuum Functionality? " + Environment.NewLine +
                     "" + Environment.NewLine +
@@ -182,8 +307,13 @@ namespace cis237assignment3
                     "   2) No" + Environment.NewLine);
             }
 
+            /// <summary>
+            /// Displays droid Fire Extinguisher selection to user.
+            /// </summary>
             public static void DisplayFireExtinguisherSelectionMenu()
             {
+                ResetMenuDisplay();
+
                 Console.WriteLine(
                     "   Add built in Fire Extinguisher? " + Environment.NewLine +
                     "" + Environment.NewLine +
@@ -191,14 +321,17 @@ namespace cis237assignment3
                     "   2) No" + Environment.NewLine);
             }
 
+            /// <summary>
+            /// Displays droid Ship-outfitting Number selection to user.
+            /// </summary>
             public static void DisplayNumberOfShipsSelectionMenu()
             {
-                Console.WriteLine(
-                    "   How many ships do you need to outfit this kind of droid onto? " + Environment.NewLine +
-                    "" + Environment.NewLine +
-                    "   1)");
-            }
+                ResetMenuDisplay();
 
+                Console.WriteLine(
+                    "   Outfit onto how many ships? " + Environment.NewLine +
+                    "" + Environment.NewLine);
+            }
         }
 
         #endregion

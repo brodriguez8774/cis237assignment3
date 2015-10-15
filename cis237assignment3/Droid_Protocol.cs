@@ -12,13 +12,19 @@ namespace cis237assignment3
     /// Class for Droids of type Protocol.
     /// Inherits only from Droid.
     /// </summary>
-    class Droid_Protocol : Droid
+    class Droid_Protocol : Droid_Generic
     {
         #region Variables
 
         protected int numberOfLanguagesInt;
         protected const decimal COST_PER_LANGUAGE = 1;        // Temp cost placeholder.
         protected decimal totalLanguageDecimal;
+
+        // Language selection constants
+        public const int LANGUAGE_SELECTION_1 = 1;
+        public const int LANGUAGE_SELECTION_2 = 3;
+        public const int LANGUAGE_SELECTION_3 = 7;
+        public const int LANGUAGE_SELECTION_4 = 15;
 
         #endregion
 
@@ -87,7 +93,7 @@ namespace cis237assignment3
 
         public override void CalculateTotalCost()
         {
-            throw new NotImplementedException();
+            base.CalculateTotalCost(); //+ totalLanguageDecimal;
         }
 
         /// <summary>

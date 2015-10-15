@@ -12,7 +12,7 @@ namespace cis237assignment3
     /// Class for Droids of type Utility.
     /// Inherits only from Droid.
     /// </summary>
-    class Droid_Utility : Droid
+    class Droid_Utility : Droid_Generic
     {
         #region Variables
 
@@ -110,7 +110,7 @@ namespace cis237assignment3
 
         public override void CalculateTotalCost()
         {
-            throw new NotImplementedException();
+            base.CalculateTotalCost();
         }
 
         /// <summary>
