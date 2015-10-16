@@ -157,7 +157,8 @@ namespace cis237assignment3
                     "   1) Purchase Droid" + Environment.NewLine +
                     "   2) Display Full Reciept" + Environment.NewLine +
                     "   3) Display Single Item" + Environment.NewLine +
-                    "   4) Exit");
+                    "   4) New Customer" + Environment.NewLine +
+                    "   5) Exit");
             }
 
             /// <summary>
@@ -350,9 +351,20 @@ namespace cis237assignment3
 
                 Console.WriteLine(
                     "   Outfit onto how many ships? " + Environment.NewLine +
-                    "" + Environment.NewLine);
+                    "" + Environment.NewLine +
+                    "   Note: This will multiply the cost by the number of droids you select. We can outfit up to 9 ships.");
+            }
+
+            public static void DisplaySingleDroidSelectionMenu()
+            {
+                ResetMenuDisplay();
+
+                Console.WriteLine("   Input Droid Number: " + Environment.NewLine +
+                    "" + Environment.NewLine +
+                    "   If needed, droid numbers can be viewed on the reciept." + Environment.NewLine);
             }
         }
+
 
         /// <summary>
         /// Displays list of droids to console.
@@ -361,37 +373,32 @@ namespace cis237assignment3
         /// <param name="currentListSize">Current size of droid list.</param>
         public static void DisplayList(string displayString, int currentListSize)
         {
-            // If no previous list was displayed.
-            if (previousListSizeInt == null)
-            {
-                previousListSizeInt = 0;
-            }
-
             ClearList();
             previousListSizeInt = currentListSize;
 
-            Console.SetCursorPosition(1, 10);
+            Console.SetCursorPosition(0, 10);
+
+            Console.WriteLine(" ".PadRight(5) + "Type".PadRight(10) + "Material".PadRight(10) + "Model".PadRight(10) + "Color".PadRight(10) + "Base Cost".PadLeft(10) + Environment.NewLine);
 
             Console.WriteLine(displayString);
         }
+
+        
 
         /// <summary>
         /// Clears currently displayed list of androids.
         /// </summary>
         public static void ClearList()
         {
-            if (previousListSizeInt != null)
+            // Clear lines equal to size of last displayed droid list.
+            Console.SetCursorPosition(1, 10);
+            int index = 0;
+            while (index < previousListSizeInt + 2)
             {
-                // Clear lines equal to size of last displayed droid list.
-                Console.SetCursorPosition(1, 10);
-                int index = 0;
-                while (index < previousListSizeInt)
-                {
-                    Console.WriteLine("".PadRight(Console.WindowWidth - 1));
-                    index++;
-                }
-                
+                Console.WriteLine("".PadRight(Console.WindowWidth - 1));
+                index++;
             }
+
         }
 
         #endregion

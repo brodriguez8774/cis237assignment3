@@ -19,10 +19,10 @@ namespace cis237assignment3
         protected string materialString;
         protected string modelString;
         protected string colorString;
-        protected decimal baseCostDecimal;
-        protected decimal totalCostDecimal;
+        protected decimal baseCostDecimal;                  // Cost of droid before any extra features. IE, just the material, model, and color cost.
+        protected decimal totalCostDecimal;                 // Full cost of droid, including all extra features.
         protected decimal costPerFeatureDecimal = 10;       // Standard cost per most features.
-        protected int numberOfItemsInt;
+        protected int numberOfItemsInt;                     // Number of individual items influencing droid price.
 
         #endregion
 
@@ -117,7 +117,7 @@ namespace cis237assignment3
         /// <returns>Single ine formatted for list of droids.</returns>
         public virtual string DisplayShortToString()
         {
-            return (materialString + " " + modelString + " : " + colorString).PadRight(30) + totalCostDecimal.ToString("C").PadLeft(10);
+            return (materialString + " ").PadRight(10) + (modelString + " - ").PadRight(10) + colorString.PadRight(10) + totalCostDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         /// <summary>

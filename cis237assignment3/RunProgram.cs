@@ -99,6 +99,7 @@ namespace cis237assignment3
                     DisplaySingle();
                     break;
                 case "4":
+                    ResetList();
                     break;
                 case "5":
                     Exit();
@@ -127,7 +128,15 @@ namespace cis237assignment3
         private void DisplayReciept()
         {
             UserInterface.ClearDisplayLine();
-            DisplayFullList();
+
+            if (droidCollection.DroidList[0] != null)
+            {
+                DisplayFullList();
+            }
+            else
+            {
+                UserInterface.DisplayError("There is no reciept to display.");
+            }
         }
 
         /// <summary>
@@ -136,7 +145,35 @@ namespace cis237assignment3
         private void DisplaySingle()
         {
             UserInterface.ClearDisplayLine();
-            //DisplaySingleDroid();
+
+            if (droidCollection.DroidList[0] != null)
+            {
+                UserInterface.Menus.DisplaySingleDroidSelectionMenu();
+
+                userInputString = UserInterface.GetUserInput();
+                try
+                {
+                    int tempInt = Convert.ToInt32(userInputString);
+
+                    if (tempInt > 0 && tempInt < droidCollection.DroidListSize)
+                    {
+                        tempInt--;
+                        DisplaySingleDroid(tempInt);
+                    }
+                    else
+                    {
+                        UserInterface.DisplayError("There is no droid associated with that number.");
+                    }
+                }
+                catch
+                {
+                    UserInterface.DisplayError("You must enter a number.");
+                }
+            }
+            else
+            {
+                UserInterface.DisplayError("There are no droids to display.");
+            }
         }
 
         /// <summary>
@@ -323,6 +360,35 @@ namespace cis237assignment3
                 droidCollection.AddDroid(aDroid);
             }
         }
+
+        /// <summary>
+        /// Displays full list of droids.
+        /// </summary>
+        private void DisplayFullList()
+        {
+            displayString = "";
+            int index = 0;
+
+            foreach (Droid droid in droidCollection.DroidList)
+            {
+                if (droid != null)
+                {
+                    index++;
+                    displayString += (" "+ index + ") ").PadRight(5) + droid.DisplayShortToString();
+                }
+            }
+
+            UserInterface.DisplayList(displayString, index);
+        }
+
+        /// <summary>
+        /// Displays information regarding a single droid.
+        /// </summary>
+        private void DisplaySingleDroid(int index)
+        {
+            displayString = droidCollection.DroidList[index].DisplayLongToString();
+        }
+
 
         #region Individual Feature Selections
 
@@ -639,7 +705,17 @@ namespace cis237assignment3
                     // Attempt to convert user input to int.
                     try
                     {
-                        selectedNumberOfShipsInt = Convert.ToInt32(userInputString);
+                        int temptInt = Convert.ToInt32(userInputString);
+                        // Makes sure selection is between 0 and 10.
+                        if (selectedNumberOfShipsInt > 0 && selectedNumberOfShipsInt < 10)
+                        {
+                            selectedNumberOfShipsInt = temptInt;
+                        }
+                        else
+                        {
+                            UserInterface.DisplayError("Must be between 0 and 10.");
+                            NumberOfShipsSelection();
+                        }
                     }
                     catch
                     {
@@ -656,35 +732,6 @@ namespace cis237assignment3
         }
 
         #endregion
-
-        /// <summary>
-        /// Displays full list of droids.
-        /// </summary>
-        private void DisplayFullList()
-        {
-            displayString = "";
-            int index = 0;
-
-            foreach (Droid droid in droidCollection.DroidList)
-            {
-                if (droid != null)
-                {
-                    displayString += " " + droid.DisplayShortToString();
-                }
-                index++;
-            }
-
-            UserInterface.DisplayList(displayString, index);
-        }
-
-        /// <summary>
-        /// Displays information regarding a single droid.
-        /// </summary>
-        private void DisplaySingleDroid(int index)
-        {
-            displayString = droidCollection.DroidList[index].DisplayLongToString();
-
-        }
 
 
         #endregion

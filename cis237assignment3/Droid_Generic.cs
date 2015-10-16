@@ -279,6 +279,15 @@ namespace cis237assignment3
          * 
          * */
 
+        /// <summary>
+        /// Determines the base cost of a droid. This is the cost of the droid minus any additional features.
+        /// IE, only the cost in regards to the model, material, and color.
+        /// </summary>
+        public void CalculateBaseCost()
+        {
+            baseCostDecimal = selectedModelDecimal + selectedMaterialDecimal + selectedColorDecimal;
+        }
+
         #endregion
 
 
@@ -301,6 +310,7 @@ namespace cis237assignment3
             selectedMaterialDecimal = 10;
             selectedColorDecimal = 10;
 
+            CalculateBaseCost();
             CalculateTotalCost();
         }
 
@@ -315,12 +325,25 @@ namespace cis237assignment3
         /// </summary>
         public override void CalculateTotalCost()
         {
-            totalCostDecimal = selectedModelDecimal + selectedMaterialDecimal + selectedColorDecimal;
+            totalCostDecimal = baseCostDecimal;
         }
 
+        /// <summary>
+        /// Shortened string for displaying of many droids, each in single line format.
+        /// </summary>
+        /// <returns>Single ine formatted for list of droids.</returns>
+        public override string DisplayShortToString()
+        {
+            return base.DisplayShortToString();
+        }
+
+        /// <summary>
+        /// Full string for displaying of single droid spanning multiple lines.
+        /// </summary>
+        /// <returns>Full information regarding single droid.</returns>
         public override string DisplayLongToString()
         {
-            return (materialString + " " + modelString + " : " + colorString).PadRight(30) + totalCostDecimal.ToString("C").PadLeft(10);
+            return (materialString + " ").PadRight(10) + (modelString + " - ").PadRight(10) + colorString.PadRight(10) + totalCostDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         #endregion

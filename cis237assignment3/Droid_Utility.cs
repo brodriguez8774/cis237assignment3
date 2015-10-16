@@ -180,22 +180,22 @@ namespace cis237assignment3
         /// <summary>
         /// Shortened string for displaying of many droids, each in single line format.
         /// </summary>
-        /// <returns>String of short Droid information.</returns>
+        /// <returns>Single ine formatted for list of droids.</returns>
         public override string DisplayShortToString()
         {
-            return "Utility Droid: " + totalCostDecimal.ToString().PadLeft(10);
+            return "Utility ".PadRight(10) + base.DisplayShortToString();
         }
 
         /// <summary>
         /// Full string for displaying of single droid spanning multiple lines.
         /// </summary>
-        /// <returns>String of full Droid information.</returns>
+        /// <returns>Full information regarding single droid.</returns>
         public override string DisplayLongToString()
         {
             return base.DisplayLongToString() + Environment.NewLine +
-                "Toolbox: " + YesNoString(hasArmBool) + Environment.NewLine +
-                "Computer Connection: " + YesNoString(hasComputerConnectiontBool) + Environment.NewLine +
-                "Arm: " + YesNoString(hasArmBool);
+                "".PadRight(5) + ("Toolbox: " + YesNoString(hasArmBool)).PadRight(30) + toolBoxDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
+                "".PadRight(5) + ("Computer Connection: " + YesNoString(hasComputerConnectiontBool)).PadRight(30) + computerConnectionDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
+                "".PadRight(5) + ("Arm: " + YesNoString(hasArmBool)).PadRight(30) + armDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         #endregion

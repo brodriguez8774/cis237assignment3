@@ -95,7 +95,8 @@ namespace cis237assignment3
 
         private void CalculateNumberOfShipsCost()
         {
-
+            CalculateTotalCost();
+            numberOfShipsDecimal = totalCostDecimal * numberOfItemsInt;
         }
 
         #endregion
@@ -108,9 +109,9 @@ namespace cis237assignment3
         {
             base.CreateDroid();
 
-            
-
-
+            CalculateFireExtinguisherCost();
+            CalculateNumberOfShipsCost();
+            CalculateTotalCost();
         }
 
         #endregion
@@ -131,20 +132,21 @@ namespace cis237assignment3
         /// <summary>
         /// Shortened string for displaying of many droids, each in single line format.
         /// </summary>
-        /// <returns>String of short Droid information.</returns>
+        /// <returns>Single ine formatted for list of droids.</returns>
         public override string DisplayShortToString()
         {
-            return "Astromech Droid: " + totalCostDecimal.ToString().PadLeft(10);
+            return "Astromech ".PadRight(10) + base.DisplayShortToString();
         }
 
         /// <summary>
         /// Full string for displaying of single droid spanning multiple lines.
         /// </summary>
-        /// <returns>String of full Droid information.</returns>
+        /// <returns>Full information regarding single droid.</returns>
         public override string DisplayLongToString()
         {
             return base.DisplayLongToString() + Environment.NewLine +
-                "Fire Extinguisher: " + YesNoString(hasFireExtinguisherBool) + Environment.NewLine;
+                "".PadRight(5) + ("Fire Extinguisher: " + YesNoString(hasFireExtinguisherBool)).PadRight(30) + fireExtinguisherDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
+                "".PadRight(5) + ("Outfitting onto " + numberOfItemsInt + " different ships.").PadRight(30) + numberOfShipsDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         #endregion

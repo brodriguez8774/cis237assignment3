@@ -115,20 +115,20 @@ namespace cis237assignment3
         /// <summary>
         /// Shortened string for displaying of many droids, each in single line format.
         /// </summary>
-        /// <returns>String of short Droid information.</returns>
+        /// <returns>Single ine formatted for list of droids.</returns>
         public override string DisplayShortToString()
         {
-            return "Protocol Droid: " + totalCostDecimal.ToString().PadLeft(10);
+            return "Protocol ".PadRight(10) + base.DisplayShortToString();
         }
 
         /// <summary>
         /// Full string for displaying of single droid spanning multiple lines.
         /// </summary>
-        /// <returns>String of full Droid information.</returns>
+        /// <returns>Full information regarding single droid.</returns>
         public override string DisplayLongToString()
         {
-            return base.DisplayLongToString() + Environment.NewLine +
-                "Languages: " + numberOfLanguagesInt;
+            return base.DisplayLongToString() +
+                "".PadRight(5) + ("Languages: " + numberOfLanguagesInt).PadRight(30) + totalLanguageDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         #endregion

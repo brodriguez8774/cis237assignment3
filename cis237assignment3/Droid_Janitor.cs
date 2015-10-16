@@ -139,21 +139,21 @@ namespace cis237assignment3
         /// <summary>
         /// Shortened string for displaying of many droids, each in single line format.
         /// </summary>
-        /// <returns>String of short Droid information.</returns>
+        /// <returns>Single ine formatted for list of droids.</returns>
         public override string DisplayShortToString()
         {
-            return "Utility Droid: " + totalCostDecimal.ToString().PadLeft(10);
+            return "Janitor ".PadRight(10) + base.DisplayShortToString();
         }
 
         /// <summary>
         /// Full string for displaying of single droid spanning multiple lines.
         /// </summary>
-        /// <returns>String of full Droid information.</returns>
+        /// <returns>Full information regarding single droid.</returns>
         public override string DisplayLongToString()
         {
             return base.DisplayLongToString() + Environment.NewLine +
-                "Trash Compactor: " + YesNoString(hasTrashCompactorBool) + Environment.NewLine +
-                "Vacuum: " + YesNoString(hasVacuumBool);
+                "".PadRight(5) + ("Trash Compactor: " + YesNoString(hasTrashCompactorBool)).PadRight(30) + trashCompactorDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
+                "".PadRight(5) + ("Vacuum: " + YesNoString(hasVacuumBool)).PadRight(30) + vacuumDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         #endregion
