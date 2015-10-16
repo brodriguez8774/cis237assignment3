@@ -33,7 +33,9 @@ namespace cis237assignment3
         protected string selectedModelString;
         protected decimal selectedModelDecimal;
         public static string MODEL_1_STRING = "TI-84";
-        public static string MODEL_2_STRING = "TI-84";
+        public static string MODEL_2_STRING = "CAT5";
+        public static string MODEL_3_STRING = "M7";
+
         private decimal model1Decimal;
         private decimal model2Decimal;
 
@@ -79,7 +81,11 @@ namespace cis237assignment3
         public Droid_Generic(string material, string model, string color)
             : base(material, model, color)
         {
+            SelectedMaterial = material;
+            SelectedModel = model;
+            SelectedColor = color;
 
+            CreateDroid();
         }
 
         #endregion
@@ -88,7 +94,20 @@ namespace cis237assignment3
 
         #region Properties
 
+        public string SelectedModel
+        {
+            set { selectedModelString = value; }
+        }
 
+        public string SelectedMaterial
+        {
+            set { selectedMaterialString = value; }
+        }
+
+        public string SelectedColor
+        {
+            set { selectedColorString = value; }
+        }
 
         #endregion
 
@@ -276,20 +295,32 @@ namespace cis237assignment3
             return Convert.ToDecimal(centsDouble);
         }
 
+        protected virtual void CreateDroid()
+        {
+            selectedModelDecimal = 10;
+            selectedMaterialDecimal = 10;
+            selectedColorDecimal = 10;
+
+            CalculateTotalCost();
+        }
+
         #endregion
 
 
 
         #region Public Methods
 
+        /// <summary>
+        /// Calculates total cost of a Generic droid.
+        /// </summary>
         public override void CalculateTotalCost()
         {
             totalCostDecimal = selectedModelDecimal + selectedMaterialDecimal + selectedColorDecimal;
         }
 
-        public override string DisplayShortToString()
+        public override string DisplayLongToString()
         {
-            return "aaa";
+            return (materialString + " " + modelString + " : " + colorString).PadRight(30) + totalCostDecimal.ToString("C").PadLeft(10);
         }
 
         #endregion

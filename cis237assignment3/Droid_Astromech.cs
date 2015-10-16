@@ -19,6 +19,9 @@ namespace cis237assignment3
         protected bool hasFireExtinguisherBool;
         protected int numberOfShipsInt;
 
+        protected decimal fireExtinguisherDecimal;
+        protected decimal numberOfShipsDecimal;
+
         #endregion
 
 
@@ -49,6 +52,9 @@ namespace cis237assignment3
         {
             HasFireExtinguisher = hasFireExtinguisher;
             NumberOfShips = numberOfShips;
+            numberOfItemsInt = 8;
+
+            CreateDroid();
         }
 
         #endregion
@@ -73,11 +79,53 @@ namespace cis237assignment3
 
 
 
-        #region Methods
+        #region Private Methods
 
+        private void CalculateFireExtinguisherCost()
+        {
+            if (hasFireExtinguisherBool)
+            {
+                fireExtinguisherDecimal = costPerFeatureDecimal;
+            }
+            else
+            {
+                fireExtinguisherDecimal = 0;
+            }
+        }
+
+        private void CalculateNumberOfShipsCost()
+        {
+
+        }
+
+        #endregion
+
+
+
+        #region Protected Methods
+
+        protected override void CreateDroid()
+        {
+            base.CreateDroid();
+
+            
+
+
+        }
+
+        #endregion
+
+
+
+        #region Public Methods
+
+        /// <summary>
+        /// Calculates total cost of a Astromech droid.
+        /// </summary>
         public override void CalculateTotalCost()
         {
             base.CalculateTotalCost();
+            totalCostDecimal += fireExtinguisherDecimal;
         }
 
         /// <summary>
@@ -93,9 +141,9 @@ namespace cis237assignment3
         /// Full string for displaying of single droid spanning multiple lines.
         /// </summary>
         /// <returns>String of full Droid information.</returns>
-        public override string DisplayFullToString()
+        public override string DisplayLongToString()
         {
-            return base.DisplayFullToString() + Environment.NewLine +
+            return base.DisplayLongToString() + Environment.NewLine +
                 "Fire Extinguisher: " + YesNoString(hasFireExtinguisherBool) + Environment.NewLine;
         }
 

@@ -19,6 +19,9 @@ namespace cis237assignment3
         protected bool hasTrashCompactorBool;
         protected bool hasVacuumBool;
 
+        protected decimal trashCompactorDecimal;
+        protected decimal vacuumDecimal;
+
         #endregion
 
 
@@ -49,6 +52,9 @@ namespace cis237assignment3
         {
             HasTrashCompactor = hasTrashCompactor;
             HasVacuum = hasVacuum;
+            numberOfItemsInt = 8;
+
+            CreateDroid();
         }
 
         #endregion
@@ -73,11 +79,61 @@ namespace cis237assignment3
 
 
 
-        #region Methods
+        #region Private Methods
 
+        private void CalculateTrashCompactorCost()
+        {
+            if (hasTrashCompactorBool)
+            {
+                trashCompactorDecimal = costPerFeatureDecimal;
+            }
+            else
+            {
+                trashCompactorDecimal = 0;
+            }
+        }
+
+        private void CalculateVacuumCost()
+        {
+            if (hasVacuumBool)
+            {
+                vacuumDecimal = costPerFeatureDecimal;
+            }
+            else
+            {
+                vacuumDecimal = 0;
+            }
+        }
+
+        #endregion
+
+
+
+        #region Protected Methods
+
+        protected override void CreateDroid()
+        {
+            base.CreateDroid();
+
+            CalculateTrashCompactorCost();
+            CalculateVacuumCost();
+
+            CalculateTotalCost();
+        }
+
+        #endregion
+
+
+
+        #region Public Methods
+
+        /// <summary>
+        /// Calculates total cost of a Janitor droid.
+        /// </summary>
         public override void CalculateTotalCost()
         {
             base.CalculateTotalCost();
+            totalCostDecimal += trashCompactorDecimal + vacuumDecimal;
         }
 
         /// <summary>
@@ -93,9 +149,9 @@ namespace cis237assignment3
         /// Full string for displaying of single droid spanning multiple lines.
         /// </summary>
         /// <returns>String of full Droid information.</returns>
-        public override string DisplayFullToString()
+        public override string DisplayLongToString()
         {
-            return base.DisplayFullToString() + Environment.NewLine +
+            return base.DisplayLongToString() + Environment.NewLine +
                 "Trash Compactor: " + YesNoString(hasTrashCompactorBool) + Environment.NewLine +
                 "Vacuum: " + YesNoString(hasVacuumBool);
         }

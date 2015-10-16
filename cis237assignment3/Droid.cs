@@ -21,7 +21,8 @@ namespace cis237assignment3
         protected string colorString;
         protected decimal baseCostDecimal;
         protected decimal totalCostDecimal;
-        protected decimal costPerFeature;       // Standard cost per most features.
+        protected decimal costPerFeatureDecimal = 10;       // Standard cost per most features.
+        protected int numberOfItemsInt;
 
         #endregion
 
@@ -86,6 +87,11 @@ namespace cis237assignment3
             get { return totalCostDecimal; }
         }
 
+        public int NumberOfItems
+        {
+            get { return numberOfItemsInt; }
+        }
+
         #endregion
 
 
@@ -100,22 +106,25 @@ namespace cis237assignment3
 
         #region Public Methods
 
+        /// <summary>
+        /// Calculates total cost of droid.
+        /// </summary>
         public abstract void CalculateTotalCost();
 
         /// <summary>
         /// Shortened string for displaying of many droids, each in single line format.
         /// </summary>
-        /// <returns>String of short Droid information.</returns>
-        public abstract string DisplayShortToString();
+        /// <returns>Single ine formatted for list of droids.</returns>
+        public virtual string DisplayShortToString()
+        {
+            return (materialString + " " + modelString + " : " + colorString).PadRight(30) + totalCostDecimal.ToString("C").PadLeft(10);
+        }
 
         /// <summary>
         /// Full string for displaying of single droid spanning multiple lines.
         /// </summary>
-        /// <returns>String of full Droid information.</returns>
-        public virtual string DisplayFullToString()
-        {
-            return materialString + " " + modelString + " : " + colorString;
-        }
+        /// <returns>Full information regarding single droid.</returns>
+        public abstract string DisplayLongToString();
 
         #endregion
 

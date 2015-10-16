@@ -20,6 +20,10 @@ namespace cis237assignment3
         protected bool hasComputerConnectiontBool;
         protected bool hasArmBool;
 
+        protected decimal toolBoxDecimal;
+        protected decimal computerConnectionDecimal;
+        protected decimal armDecimal;
+
         #endregion
 
 
@@ -49,6 +53,9 @@ namespace cis237assignment3
             HasToolBox = hasToolBoxBool;
             HasComputerConnection = hasComputerConnection;
             HasArm = hasArm;
+            numberOfItemsInt = 6;
+
+            CreateDroid();
         }
 
         #endregion
@@ -79,6 +86,48 @@ namespace cis237assignment3
 
 
 
+        #region Private Methods
+
+        private void CalculateToolBoxCost()
+        {
+            if (hasToolBoxBool)
+            {
+                toolBoxDecimal = costPerFeatureDecimal;
+            }
+            else
+            {
+                toolBoxDecimal = 0;
+            }
+        }
+
+        private void CalculateConnectionCost()
+        {
+            if (hasComputerConnectiontBool)
+            {
+                computerConnectionDecimal = costPerFeatureDecimal;
+            }
+            else
+            {
+                computerConnectionDecimal = 0;
+            }
+        }
+
+        private void CalculateArmCost()
+        {
+            if (hasArmBool)
+            {
+                armDecimal = costPerFeatureDecimal;
+            }
+            else
+            {
+                armDecimal = 0;
+            }
+        }
+
+        #endregion
+
+
+
         #region Protected Methods
 
         /// <summary>
@@ -102,15 +151,30 @@ namespace cis237assignment3
             return displayString;
         }
 
+        protected override void CreateDroid()
+        {
+            base.CreateDroid();
+
+            CalculateToolBoxCost();
+            CalculateConnectionCost();
+            CalculateArmCost();
+
+            CalculateTotalCost();
+        }
+
         #endregion
 
 
 
         #region Public Methods
 
+        /// <summary>
+        /// Calculates total cost of a Utility droid.
+        /// </summary>
         public override void CalculateTotalCost()
         {
             base.CalculateTotalCost();
+            totalCostDecimal += toolBoxDecimal + computerConnectionDecimal + armDecimal;
         }
 
         /// <summary>
@@ -126,9 +190,9 @@ namespace cis237assignment3
         /// Full string for displaying of single droid spanning multiple lines.
         /// </summary>
         /// <returns>String of full Droid information.</returns>
-        public override string DisplayFullToString()
+        public override string DisplayLongToString()
         {
-            return base.DisplayFullToString() + Environment.NewLine +
+            return base.DisplayLongToString() + Environment.NewLine +
                 "Toolbox: " + YesNoString(hasArmBool) + Environment.NewLine +
                 "Computer Connection: " + YesNoString(hasComputerConnectiontBool) + Environment.NewLine +
                 "Arm: " + YesNoString(hasArmBool);

@@ -17,6 +17,9 @@ namespace cis237assignment3
 
         private bool runProgram;
         private bool menusBool;         // Used to exit back to main menu if user decides to. True to stay in menus. False if user typed to exit.
+        string displayString;
+
+        private DroidCollection droidCollection;
 
         // Variables for getting/saving user input.
         private string userInputString;
@@ -67,6 +70,7 @@ namespace cis237assignment3
         /// </summary>
         private void Run()
         {
+            ResetList();
             while (runProgram)
             {
                 // Resets/initializes menu bool to allow user to stay in menus.
@@ -78,6 +82,9 @@ namespace cis237assignment3
             }
         }
 
+        /// <summary>
+        /// Handles Main Menu Selection.
+        /// </summary>
         private void MainMenuSelection()
         {
             switch (userInputString)
@@ -92,36 +99,67 @@ namespace cis237assignment3
                     DisplaySingle();
                     break;
                 case "4":
+                    break;
+                case "5":
                     Exit();
                     break;
                 case "esc":
                     Exit();
                     break;
                 default:
+                    UserInterface.DisplayError("Invalid selection.");
                     break;
             }
         }
 
+        /// <summary>
+        /// User selection to add a new droid to list.
+        /// </summary>
         private void PurchaseDroid()
         {
+            UserInterface.ClearDisplayLine();
             DroidTypeSelection();
         }
 
+        /// <summary>
+        /// Displays information for full droid list.
+        /// </summary>
         private void DisplayReciept()
         {
-
+            UserInterface.ClearDisplayLine();
+            DisplayFullList();
         }
 
+        /// <summary>
+        /// Displays information for single droid.
+        /// </summary>
         private void DisplaySingle()
         {
-
+            UserInterface.ClearDisplayLine();
+            //DisplaySingleDroid();
         }
 
+        /// <summary>
+        /// Creates new android list and removes all information pertaining to old one.
+        /// </summary>
+        private void ResetList()
+        {
+            UserInterface.ClearDisplayLine();
+            UserInterface.ClearList();
+            droidCollection = new DroidCollection();
+        }
+
+        /// <summary>
+        /// Exits program.
+        /// </summary>
         private void Exit()
         {
             runProgram = false;
         }
 
+        /// <summary>
+        /// Handles user selection of droid Type.
+        /// </summary>
         private void DroidTypeSelection()
         {
             UserInterface.Menus.DisplayTypeSelectionMenu();
@@ -142,8 +180,11 @@ namespace cis237assignment3
                     PurchaseAstromech();
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     break;
                 default:
+                    UserInterface.DisplayError("Invalid selection.");
+                    DroidTypeSelection();
                     break;
             }
         }
@@ -155,14 +196,17 @@ namespace cis237assignment3
         {
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 ModelSelection();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 MaterialSelection();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 ColorSelection();
             }
 
@@ -175,15 +219,19 @@ namespace cis237assignment3
         {
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 PurchaseGeneric();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 LanguageSelection();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 IDroid aDroid = new Droid_Protocol(selectedMaterialString, selectedModelString, selectedColorString, selectedLanguageInt);
+                droidCollection.AddDroid(aDroid);
             }
         }
 
@@ -194,23 +242,29 @@ namespace cis237assignment3
         {
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 PurchaseGeneric();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 ToolBoxSelection();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 CompConnectionSelection();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 ArmSelection();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 IDroid aDroid = new Droid_Utility(selectedMaterialString, selectedModelString, selectedColorString, toolBoxBool, computerConnectionBool, armBool);
+                droidCollection.AddDroid(aDroid);
             }
         }
 
@@ -221,19 +275,24 @@ namespace cis237assignment3
         {
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 PurchaseUtility();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 TrashCompactorSelection();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 VacuumSelection();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 IDroid aDroid = new Droid_Janitor(selectedMaterialString, selectedModelString, selectedColorString, toolBoxBool, computerConnectionBool, armBool, trashCompactorBool, vacuumBool);
+                droidCollection.AddDroid(aDroid);
             }
         }
 
@@ -244,19 +303,24 @@ namespace cis237assignment3
         {
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 PurchaseUtility();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 FireExtinguisherSelection();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 NumberOfShipsSelection();
             }
             if (menusBool)
             {
+                UserInterface.ClearDisplayLine();
                 IDroid aDroid = new Droid_Astromech(selectedMaterialString, selectedModelString, selectedColorString, toolBoxBool, computerConnectionBool, armBool, fireExtinguisherBool, selectedNumberOfShipsInt);
+                droidCollection.AddDroid(aDroid);
             }
         }
 
@@ -267,7 +331,7 @@ namespace cis237assignment3
         /// </summary>
         private void ModelSelection()
         {
-            UserInterface.Menus.DisplayModelSelectionMenu(Droid_Generic.MODEL_1_STRING, Droid_Generic.MODEL_2_STRING);
+            UserInterface.Menus.DisplayModelSelectionMenu(Droid_Generic.MODEL_1_STRING, Droid_Generic.MODEL_2_STRING, Droid_Generic.MODEL_3_STRING);
             userInputString = UserInterface.GetUserInput();
 
             switch (userInputString)
@@ -279,13 +343,15 @@ namespace cis237assignment3
                     selectedModelString = Droid_Generic.MODEL_2_STRING;
                     break;
                 case "3":
-                    break;
-                case "4":
+                    selectedModelString = Droid_Generic.MODEL_3_STRING;
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
                     break;
                 default:
+                    UserInterface.DisplayError("Invalid Selection.");
+                    ModelSelection();
                     break;
             }
         }
@@ -316,9 +382,12 @@ namespace cis237assignment3
                     selectedMaterialString = Droid_Generic.MATERIAL_5_STRING;
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
                     break;
                 default:
+                    UserInterface.DisplayError("Invalid Selection.");
+                    MaterialSelection();
                     break;
             }
         }
@@ -349,9 +418,12 @@ namespace cis237assignment3
                     selectedColorString = Droid_Generic.COLOR_5_STRING;
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
                     break;
                 default:
+                    UserInterface.DisplayError("Invalid Selection");
+                    ColorSelection();
                     break;
             }
         }
@@ -379,7 +451,12 @@ namespace cis237assignment3
                     selectedLanguageInt = Droid_Protocol.LANGUAGE_SELECTION_4;
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
+                    break;
+                default:
+                    UserInterface.DisplayError("Invalid Selection");
+                    LanguageSelection();
                     break;
             }
         }
@@ -401,7 +478,12 @@ namespace cis237assignment3
                     toolBoxBool = false;
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
+                    break;
+                default:
+                    UserInterface.DisplayError("Invalid Selection.");
+                    ToolBoxSelection();
                     break;
             }
         }
@@ -423,7 +505,12 @@ namespace cis237assignment3
                     computerConnectionBool = false;
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
+                    break;
+                default:
+                    UserInterface.DisplayError("Invalid Selection.");
+                    CompConnectionSelection();
                     break;
             }
         }
@@ -445,7 +532,12 @@ namespace cis237assignment3
                     armBool = false;
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
+                    break;
+                default:
+                    UserInterface.DisplayError("Invalid Selection.");
+                    ArmSelection();
                     break;
             }
         }
@@ -467,7 +559,12 @@ namespace cis237assignment3
                     trashCompactorBool = false;
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
+                    break;
+                default:
+                    UserInterface.DisplayError("Invalid Selection.");
+                    TrashCompactorSelection();
                     break;
             }
         }
@@ -489,7 +586,12 @@ namespace cis237assignment3
                     vacuumBool = false;
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
+                    break;
+                default:
+                    UserInterface.DisplayError("Invalid Selection.");
+                    VacuumSelection();
                     break;
             }
         }
@@ -511,7 +613,12 @@ namespace cis237assignment3
                     fireExtinguisherBool = false;
                     break;
                 case "esc":
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
+                    break;
+                default:
+                    UserInterface.DisplayError("Invalid Selection.");
+                    FireExtinguisherSelection();
                     break;
             }
         }
@@ -542,12 +649,42 @@ namespace cis237assignment3
                 }
                 else
                 {
+                    UserInterface.ClearDisplayLine();
                     menusBool = false;
                 }
             }
         }
 
         #endregion
+
+        /// <summary>
+        /// Displays full list of droids.
+        /// </summary>
+        private void DisplayFullList()
+        {
+            displayString = "";
+            int index = 0;
+
+            foreach (Droid droid in droidCollection.DroidList)
+            {
+                if (droid != null)
+                {
+                    displayString += " " + droid.DisplayShortToString();
+                }
+                index++;
+            }
+
+            UserInterface.DisplayList(displayString, index);
+        }
+
+        /// <summary>
+        /// Displays information regarding a single droid.
+        /// </summary>
+        private void DisplaySingleDroid(int index)
+        {
+            displayString = droidCollection.DroidList[index].DisplayLongToString();
+
+        }
 
 
         #endregion

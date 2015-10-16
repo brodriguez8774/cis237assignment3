@@ -97,4 +97,7 @@ https://msdn.microsoft.com/en-us/library/ah19swz4.aspx
 https://msdn.microsoft.com/en-us/library/aa288471%28v=vs.71%29.aspx
 * Structs for ease of organization.
 
+https://msdn.microsoft.com/en-us/library/hfw7t1ce.aspx
+* Figured out how to use base in a void override method.
+
 ## Known Problems, Issues, And/Or Errors in the Program

@@ -13,7 +13,7 @@ namespace cis237assignment3
     /// Having one class handle everything UI helps create consistency.
     /// 
     /// Note: Having the interface methods accept parameters instead of directly calling static variables prevents the
-    /// interface from having to directly access multiple classes itself. Only RunProgram will access multiple classes
+    /// interface from having to directly access multiple classes itself. Preferably, only RunProgram will access multiple classes
     /// due to it being the "binding" between all the classes.
     /// 
     /// Instead, Interface just tells RunProgram what it needs to work and never deals directly with other classes.
@@ -23,6 +23,7 @@ namespace cis237assignment3
         #region Variables
 
         private static string userInputString;
+        private static int previousListSizeInt;
 
         #endregion
 
@@ -76,6 +77,11 @@ namespace cis237assignment3
             SetMenuCursor();
         }
 
+        private static void ResetDroidDisplay()
+        {
+
+        }
+
         #endregion
 
 
@@ -99,15 +105,24 @@ namespace cis237assignment3
             return userInputString;
         }
 
-
+        /// <summary>
+        /// Displays a line to console.
+        /// </summary>
+        /// <param name="displayString">String to display.</param>
         public static void DisplayLine(string displayString)
         {
+            ClearDisplayLine();
             Console.WriteLine(displayString);
         }
 
-
+        /// <summary>
+        /// Displays an error line to console.
+        /// </summary>
+        /// <param name="displayString">String of error to display.</param>
         public static void DisplayError(string displayString)
         {
+            ClearDisplayLine();
+
             Console.SetCursorPosition(1, 8);
 
             Console.ForegroundColor = ConsoleColor.Red;
@@ -115,9 +130,13 @@ namespace cis237assignment3
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
+        /// <summary>
+        /// Clears display line from console.
+        /// </summary>
         public static void ClearDisplayLine()
         {
-
+            Console.SetCursorPosition(0, 8);
+            Console.WriteLine("".PadRight(Console.WindowWidth - 1));
         }
 
         /// <summary>
@@ -162,7 +181,7 @@ namespace cis237assignment3
             /// </summary>
             /// <param name="model1">Droid Model 1.</param>
             /// <param name="model2">Droid Model 2.</param>
-            public static void DisplayModelSelectionMenu(string model1, string model2)
+            public static void DisplayModelSelectionMenu(string model1, string model2, string model3)
             {
                 ResetMenuDisplay();
 
@@ -170,7 +189,8 @@ namespace cis237assignment3
                     "   Select a Droid Model: " + Environment.NewLine +
                     "" + Environment.NewLine +
                     "   1) " + model1 + Environment.NewLine +
-                    "   2) " + model2 + Environment.NewLine);
+                    "   2) " + model2 + Environment.NewLine +
+                    "   3) " + model3 + Environment.NewLine);
             }
 
             /// <summary>
@@ -331,6 +351,46 @@ namespace cis237assignment3
                 Console.WriteLine(
                     "   Outfit onto how many ships? " + Environment.NewLine +
                     "" + Environment.NewLine);
+            }
+        }
+
+        /// <summary>
+        /// Displays list of droids to console.
+        /// </summary>
+        /// <param name="displayString">String of droids to display.</param>
+        /// <param name="currentListSize">Current size of droid list.</param>
+        public static void DisplayList(string displayString, int currentListSize)
+        {
+            // If no previous list was displayed.
+            if (previousListSizeInt == null)
+            {
+                previousListSizeInt = 0;
+            }
+
+            ClearList();
+            previousListSizeInt = currentListSize;
+
+            Console.SetCursorPosition(1, 10);
+
+            Console.WriteLine(displayString);
+        }
+
+        /// <summary>
+        /// Clears currently displayed list of androids.
+        /// </summary>
+        public static void ClearList()
+        {
+            if (previousListSizeInt != null)
+            {
+                // Clear lines equal to size of last displayed droid list.
+                Console.SetCursorPosition(1, 10);
+                int index = 0;
+                while (index < previousListSizeInt)
+                {
+                    Console.WriteLine("".PadRight(Console.WindowWidth - 1));
+                    index++;
+                }
+                
             }
         }
 

@@ -51,6 +51,9 @@ namespace cis237assignment3
             : base(material, model, color)
         {
             NumberOfLanguages = numberOfLanguages;
+            numberOfItemsInt = 4;
+
+            CreateDroid();
         }
 
         #endregion
@@ -62,11 +65,6 @@ namespace cis237assignment3
         public int NumberOfLanguages
         {
             set { numberOfLanguagesInt = value; }
-            get { return numberOfLanguagesInt; }
-        }
-
-        public decimal TotalLanguageCost
-        {
             get { return numberOfLanguagesInt; }
         }
 
@@ -88,12 +86,30 @@ namespace cis237assignment3
 
 
 
+        #region Protected methods
+
+        protected override void CreateDroid()
+        {
+            base.CreateDroid();
+
+            CalculateLanguageCost();
+
+            CalculateTotalCost();
+        }
+
+        #endregion
+
+
 
         #region Public Methods
 
+        /// <summary>
+        /// Calculates total cost of a Protocol droid.
+        /// </summary>
         public override void CalculateTotalCost()
         {
-            base.CalculateTotalCost(); //+ totalLanguageDecimal;
+            base.CalculateTotalCost();
+            totalCostDecimal += totalLanguageDecimal;
         }
 
         /// <summary>
@@ -109,9 +125,9 @@ namespace cis237assignment3
         /// Full string for displaying of single droid spanning multiple lines.
         /// </summary>
         /// <returns>String of full Droid information.</returns>
-        public override string DisplayFullToString()
+        public override string DisplayLongToString()
         {
-            return base.DisplayFullToString() + Environment.NewLine +
+            return base.DisplayLongToString() + Environment.NewLine +
                 "Languages: " + numberOfLanguagesInt;
         }
 

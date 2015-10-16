@@ -14,8 +14,23 @@ namespace cis237assignment3
     /// </summary>
     interface IDroid
     {
+        /// <summary>
+        /// Calculates total cost of droid.
+        /// </summary>
         void CalculateTotalCost();
 
         decimal TotalCost { get; set; }
+
+        /// <summary>
+        /// Shortened string for displaying of many droids, each in single line format.
+        /// </summary>
+        /// <returns>Single ine formatted for list of droids.</returns>
+        string DisplayShortToString();
+
+        /// <summary>
+        /// Full string for displaying of single droid spanning multiple lines.
+        /// </summary>
+        /// <returns>Full information regarding single droid.</returns>
+        string DisplayLongToString();
     }
 }
