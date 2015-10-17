@@ -16,7 +16,6 @@ namespace cis237assignment3
         #region Variables
 
         // All the necessary variables for material selection.
-        private string selectedMaterialString;
         private decimal selectedMaterialDecimal;
         public static string MATERIAL_1_STRING = "Tin";
         public static string MATERIAL_2_STRING = "Steel";
@@ -30,7 +29,6 @@ namespace cis237assignment3
         private decimal material5Decimal;
 
         // All the necessary variables for model selection.
-        protected string selectedModelString;
         protected decimal selectedModelDecimal;
         public static string MODEL_1_STRING = "TI-84";
         public static string MODEL_2_STRING = "CAT5";
@@ -40,7 +38,6 @@ namespace cis237assignment3
         private decimal model2Decimal;
 
         // All the necessary variables for color selection.
-        private string selectedColorString;
         private decimal selectedColorDecimal;
         public static string COLOR_1_STRING = "White";
         public static string COLOR_2_STRING = "Black";
@@ -81,11 +78,7 @@ namespace cis237assignment3
         public Droid_Generic(string material, string model, string color)
             : base(material, model, color)
         {
-            SelectedMaterial = material;
-            SelectedModel = model;
-            SelectedColor = color;
 
-            CreateDroid();
         }
 
         #endregion
@@ -94,20 +87,7 @@ namespace cis237assignment3
 
         #region Properties
 
-        public string SelectedModel
-        {
-            set { selectedModelString = value; }
-        }
 
-        public string SelectedMaterial
-        {
-            set { selectedMaterialString = value; }
-        }
-
-        public string SelectedColor
-        {
-            set { selectedColorString = value; }
-        }
 
         #endregion
 
@@ -288,6 +268,16 @@ namespace cis237assignment3
             baseCostDecimal = selectedModelDecimal + selectedMaterialDecimal + selectedColorDecimal;
         }
 
+        /// <summary>
+        /// Creates string for droid type. Needed due to how inheritance works.
+        /// </summary>
+        /// <returns>String of droid's type.</returns>
+        protected virtual string TypeString()
+        {
+            return "";
+        }
+        
+
         #endregion
 
 
@@ -302,16 +292,6 @@ namespace cis237assignment3
         {
             double centsDouble = random.NextDouble();
             return Convert.ToDecimal(centsDouble);
-        }
-
-        protected virtual void CreateDroid()
-        {
-            selectedModelDecimal = 10;
-            selectedMaterialDecimal = 10;
-            selectedColorDecimal = 10;
-
-            CalculateBaseCost();
-            CalculateTotalCost();
         }
 
         #endregion
@@ -329,12 +309,24 @@ namespace cis237assignment3
         }
 
         /// <summary>
+        /// Calculates individual feature costs of droid.
+        /// </summary>
+        public override void CalculateFeatures()
+        {
+            selectedModelDecimal = 10;
+            selectedMaterialDecimal = 10;
+            selectedColorDecimal = 10;
+
+            CalculateBaseCost();
+        }
+
+        /// <summary>
         /// Shortened string for displaying of many droids, each in single line format.
         /// </summary>
         /// <returns>Single ine formatted for list of droids.</returns>
         public override string DisplayShortToString()
         {
-            return base.DisplayShortToString();
+            return TypeString().PadRight(11) + base.DisplayShortToString();
         }
 
         /// <summary>
@@ -343,7 +335,9 @@ namespace cis237assignment3
         /// <returns>Full information regarding single droid.</returns>
         public override string DisplayLongToString()
         {
-            return (materialString + " ").PadRight(10) + (modelString + " - ").PadRight(10) + colorString.PadRight(10) + totalCostDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
+            return "".PadRight(5) + TypeString().PadRight(11) + (selectedMaterialString + " ").PadRight(11) + (selectedModelString + " ").PadRight(10) + selectedColorString.PadRight(10) + baseCostDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
+                Environment.NewLine +
+                Environment.NewLine;
         }
 
         #endregion

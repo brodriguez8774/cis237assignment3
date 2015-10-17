@@ -50,12 +50,10 @@ namespace cis237assignment3
         public Droid_Utility(string material, string model, string color, bool hasToolBox, bool hasComputerConnection, bool hasArm)
             : base(material, model, color)
         {
-            HasToolBox = hasToolBoxBool;
+            HasToolBox = hasToolBox;
             HasComputerConnection = hasComputerConnection;
             HasArm = hasArm;
             numberOfItemsInt = 6;
-
-            CreateDroid();
         }
 
         #endregion
@@ -151,15 +149,13 @@ namespace cis237assignment3
             return displayString;
         }
 
-        protected override void CreateDroid()
+        /// <summary>
+        /// Creates string for droid type. Needed due to how inheritance works.
+        /// </summary>
+        /// <returns>String of droid's type.</returns>
+        protected override string TypeString()
         {
-            base.CreateDroid();
-
-            CalculateToolBoxCost();
-            CalculateConnectionCost();
-            CalculateArmCost();
-
-            CalculateTotalCost();
+            return "Utility ";
         }
 
         #endregion
@@ -178,12 +174,15 @@ namespace cis237assignment3
         }
 
         /// <summary>
-        /// Shortened string for displaying of many droids, each in single line format.
+        /// Calculates individual feature costs of droid.
         /// </summary>
-        /// <returns>Single ine formatted for list of droids.</returns>
-        public override string DisplayShortToString()
+        public override void CalculateFeatures()
         {
-            return "Utility ".PadRight(10) + base.DisplayShortToString();
+            base.CalculateFeatures();
+
+            CalculateToolBoxCost();
+            CalculateConnectionCost();
+            CalculateArmCost();
         }
 
         /// <summary>
@@ -192,10 +191,10 @@ namespace cis237assignment3
         /// <returns>Full information regarding single droid.</returns>
         public override string DisplayLongToString()
         {
-            return base.DisplayLongToString() + Environment.NewLine +
-                "".PadRight(5) + ("Toolbox: " + YesNoString(hasArmBool)).PadRight(30) + toolBoxDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
-                "".PadRight(5) + ("Computer Connection: " + YesNoString(hasComputerConnectiontBool)).PadRight(30) + computerConnectionDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
-                "".PadRight(5) + ("Arm: " + YesNoString(hasArmBool)).PadRight(30) + armDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
+            return base.DisplayLongToString() +
+                "".PadRight(5) + "Toolbox: ".PadRight(25) + YesNoString(hasArmBool).PadRight(17) + toolBoxDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
+                "".PadRight(5) + "Computer Connection: ".PadRight(25) + YesNoString(hasComputerConnectiontBool).PadRight(17) + computerConnectionDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
+                "".PadRight(5) + "Arm: ".PadRight(25) + YesNoString(hasArmBool).PadRight(17) + armDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         #endregion

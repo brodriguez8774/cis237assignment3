@@ -19,13 +19,25 @@ namespace cis237assignment3
         /// </summary>
         void CalculateTotalCost();
 
+        /// <summary>
+        /// Calculates individual feature costs of droid.
+        /// </summary>
+        void CalculateFeatures();
+
+        // Total cost of droid.
         decimal TotalCost { get; set; }
+
+
+        // Number of individual items influencing droid price.
+        int NumberOfItems { get; }
+
 
         /// <summary>
         /// Shortened string for displaying of many droids, each in single line format.
         /// </summary>
         /// <returns>Single ine formatted for list of droids.</returns>
         string DisplayShortToString();
+
 
         /// <summary>
         /// Full string for displaying of single droid spanning multiple lines.

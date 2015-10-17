@@ -155,7 +155,7 @@ namespace cis237assignment3
                 {
                     int tempInt = Convert.ToInt32(userInputString);
 
-                    if (tempInt > 0 && tempInt < droidCollection.DroidListSize)
+                    if (tempInt > 0 && tempInt <= droidCollection.DroidListSize)
                     {
                         tempInt--;
                         DisplaySingleDroid(tempInt);
@@ -206,15 +206,55 @@ namespace cis237assignment3
             {
                 case "1":
                     PurchaseProtocol();
+
+                    // After user selects values for droid, actually create it, add it to the collection, and calculate the various associated prices.
+                    if (menusBool)
+                    {
+                        UserInterface.ClearDisplayLine();
+                        IDroid aDroid = new Droid_Protocol(selectedMaterialString, selectedModelString, selectedColorString, selectedLanguageInt);
+                        droidCollection.AddDroid(aDroid);
+                        droidCollection.DroidList[droidCollection.DroidListSize - 1].CalculateFeatures();
+                        droidCollection.DroidList[droidCollection.DroidListSize - 1].CalculateTotalCost();
+                    }
                     break;
                 case "2":
                     PurchaseUtility();
+
+                    // After user selects values for droid, actually create it, add it to the collection, and calculate the various associated prices.
+                    if (menusBool)
+                    {
+                        UserInterface.ClearDisplayLine();
+                        IDroid aDroid = new Droid_Utility(selectedMaterialString, selectedModelString, selectedColorString, toolBoxBool, computerConnectionBool, armBool);
+                        droidCollection.AddDroid(aDroid);
+                        droidCollection.DroidList[droidCollection.DroidListSize - 1].CalculateFeatures();
+                        droidCollection.DroidList[droidCollection.DroidListSize - 1].CalculateTotalCost();
+                    }
                     break;
                 case "3":
                     PurchaseJanitor();
+
+                    // After user selects values for droid, actually create it, add it to the collection, and calculate the various associated prices.
+                    if (menusBool)
+                    {
+                        UserInterface.ClearDisplayLine();
+                        IDroid aDroid = new Droid_Janitor(selectedMaterialString, selectedModelString, selectedColorString, toolBoxBool, computerConnectionBool, armBool, trashCompactorBool, vacuumBool);
+                        droidCollection.AddDroid(aDroid);
+                        droidCollection.DroidList[droidCollection.DroidListSize - 1].CalculateFeatures();
+                        droidCollection.DroidList[droidCollection.DroidListSize - 1].CalculateTotalCost();
+                    }
                     break;
                 case "4":
                     PurchaseAstromech();
+
+                    // After user selects values for droid, actually create it, add it to the collection, and calculate the various associated prices.
+                    if (menusBool)
+                    {
+                        UserInterface.ClearDisplayLine();
+                        IDroid aDroid = new Droid_Astromech(selectedMaterialString, selectedModelString, selectedColorString, toolBoxBool, computerConnectionBool, armBool, fireExtinguisherBool, selectedNumberOfShipsInt);
+                        droidCollection.AddDroid(aDroid);
+                        droidCollection.DroidList[droidCollection.DroidListSize - 1].CalculateFeatures();
+                        droidCollection.DroidList[droidCollection.DroidListSize - 1].CalculateTotalCost();
+                    }
                     break;
                 case "esc":
                     UserInterface.ClearDisplayLine();
@@ -264,12 +304,6 @@ namespace cis237assignment3
                 UserInterface.ClearDisplayLine();
                 LanguageSelection();
             }
-            if (menusBool)
-            {
-                UserInterface.ClearDisplayLine();
-                IDroid aDroid = new Droid_Protocol(selectedMaterialString, selectedModelString, selectedColorString, selectedLanguageInt);
-                droidCollection.AddDroid(aDroid);
-            }
         }
 
         /// <summary>
@@ -297,12 +331,6 @@ namespace cis237assignment3
                 UserInterface.ClearDisplayLine();
                 ArmSelection();
             }
-            if (menusBool)
-            {
-                UserInterface.ClearDisplayLine();
-                IDroid aDroid = new Droid_Utility(selectedMaterialString, selectedModelString, selectedColorString, toolBoxBool, computerConnectionBool, armBool);
-                droidCollection.AddDroid(aDroid);
-            }
         }
 
         /// <summary>
@@ -325,12 +353,6 @@ namespace cis237assignment3
                 UserInterface.ClearDisplayLine();
                 VacuumSelection();
             }
-            if (menusBool)
-            {
-                UserInterface.ClearDisplayLine();
-                IDroid aDroid = new Droid_Janitor(selectedMaterialString, selectedModelString, selectedColorString, toolBoxBool, computerConnectionBool, armBool, trashCompactorBool, vacuumBool);
-                droidCollection.AddDroid(aDroid);
-            }
         }
 
         /// <summary>
@@ -352,12 +374,6 @@ namespace cis237assignment3
             {
                 UserInterface.ClearDisplayLine();
                 NumberOfShipsSelection();
-            }
-            if (menusBool)
-            {
-                UserInterface.ClearDisplayLine();
-                IDroid aDroid = new Droid_Astromech(selectedMaterialString, selectedModelString, selectedColorString, toolBoxBool, computerConnectionBool, armBool, fireExtinguisherBool, selectedNumberOfShipsInt);
-                droidCollection.AddDroid(aDroid);
             }
         }
 
@@ -387,6 +403,7 @@ namespace cis237assignment3
         private void DisplaySingleDroid(int index)
         {
             displayString = droidCollection.DroidList[index].DisplayLongToString();
+            UserInterface.DisplaySingleDroidInfo(displayString, droidCollection.DroidList[index].NumberOfItems, droidCollection.DroidList[index].TotalCost);
         }
 
 
@@ -694,40 +711,37 @@ namespace cis237assignment3
         /// </summary>
         private void NumberOfShipsSelection()
         {
-            while (menusBool)
-            {
-                UserInterface.Menus.DisplayNumberOfShipsSelectionMenu();
-                userInputString = UserInterface.GetUserInput();
+            UserInterface.Menus.DisplayNumberOfShipsSelectionMenu();
+            userInputString = UserInterface.GetUserInput();
 
-                // If user does not want to back out of menu.
-                if (userInputString != "esc")
+            // If user does not want to back out of menu.
+            if (userInputString != "esc")
+            {
+                // Attempt to convert user input to int.
+                try
                 {
-                    // Attempt to convert user input to int.
-                    try
+                    int temptInt = Convert.ToInt32(userInputString);
+                    // Makes sure selection is between 0 and 10.
+                    if (temptInt > 0 && temptInt < 10)
                     {
-                        int temptInt = Convert.ToInt32(userInputString);
-                        // Makes sure selection is between 0 and 10.
-                        if (selectedNumberOfShipsInt > 0 && selectedNumberOfShipsInt < 10)
-                        {
-                            selectedNumberOfShipsInt = temptInt;
-                        }
-                        else
-                        {
-                            UserInterface.DisplayError("Must be between 0 and 10.");
-                            NumberOfShipsSelection();
-                        }
+                        selectedNumberOfShipsInt = temptInt;
                     }
-                    catch
+                    else
                     {
-                        UserInterface.DisplayError("Not a valid number.");
+                        UserInterface.DisplayError("Must be between 0 and 10.");
                         NumberOfShipsSelection();
                     }
                 }
-                else
+                catch
                 {
-                    UserInterface.ClearDisplayLine();
-                    menusBool = false;
+                    UserInterface.DisplayError("Not a valid number.");
+                    NumberOfShipsSelection();
                 }
+            }
+            else
+            {
+                UserInterface.ClearDisplayLine();
+                menusBool = false;
             }
         }
 

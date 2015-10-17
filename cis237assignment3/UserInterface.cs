@@ -350,9 +350,9 @@ namespace cis237assignment3
                 ResetMenuDisplay();
 
                 Console.WriteLine(
-                    "   Outfit onto how many ships? " + Environment.NewLine +
+                    "   Program for how many ship types? " + Environment.NewLine +
                     "" + Environment.NewLine +
-                    "   Note: This will multiply the cost by the number of droids you select. We can outfit up to 9 ships.");
+                    "   Note: We can only program up to 9 ship types.");
             }
 
             public static void DisplaySingleDroidSelectionMenu()
@@ -378,12 +378,10 @@ namespace cis237assignment3
 
             Console.SetCursorPosition(0, 10);
 
-            Console.WriteLine(" ".PadRight(5) + "Type".PadRight(10) + "Material".PadRight(10) + "Model".PadRight(10) + "Color".PadRight(10) + "Base Cost".PadLeft(10) + Environment.NewLine);
+            Console.WriteLine(" ".PadRight(5) + "Type".PadRight(11) + "Material".PadRight(11) + "Model".PadRight(10) + "Color".PadRight(10) + "Total Cost".PadLeft(10) + Environment.NewLine);
 
             Console.WriteLine(displayString);
         }
-
-        
 
         /// <summary>
         /// Clears currently displayed list of androids.
@@ -391,14 +389,37 @@ namespace cis237assignment3
         public static void ClearList()
         {
             // Clear lines equal to size of last displayed droid list.
-            Console.SetCursorPosition(1, 10);
+            Console.SetCursorPosition(0, 10);
             int index = 0;
-            while (index < previousListSizeInt + 2)
+            while (index < previousListSizeInt + 5)
             {
                 Console.WriteLine("".PadRight(Console.WindowWidth - 1));
                 index++;
             }
 
+        }
+
+        /// <summary>
+        /// Displays list of droids to console.
+        /// </summary>
+        /// <param name="displayString">String of droids to display.</param>
+        /// <param name="currentListSize">Number of items which effect droid's price.</param>
+        public static void DisplaySingleDroidInfo(string displayString, int numberOfItemsForDroid, decimal totalCost)
+        {
+            ClearList();
+            previousListSizeInt = numberOfItemsForDroid;
+
+            Console.SetCursorPosition(0, 10);
+
+            Console.WriteLine(" ".PadRight(5) + "Type".PadRight(11) + "Material".PadRight(11) + "Model".PadRight(10) + "Color".PadRight(10) + "Base Cost".PadLeft(10) + Environment.NewLine +
+                Environment.NewLine +
+                Environment.NewLine +
+                "".PadRight(5) + "Feature".PadRight(25) + "Selection".PadRight(17) + "Cost".PadLeft(10));
+
+            Console.SetCursorPosition(0, 11);
+            Console.WriteLine(displayString);
+
+            Console.WriteLine("".PadRight(5) + "Total Droid Cost: ".PadRight(25) + totalCost.ToString("C").PadLeft(15));
         }
 
         #endregion

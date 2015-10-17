@@ -16,9 +16,9 @@ namespace cis237assignment3
     {
         #region Variables
 
-        protected string materialString;
-        protected string modelString;
-        protected string colorString;
+        protected string selectedMaterialString;
+        protected string selectedModelString;
+        protected string selectedColorString;
         protected decimal baseCostDecimal;                  // Cost of droid before any extra features. IE, just the material, model, and color cost.
         protected decimal totalCostDecimal;                 // Full cost of droid, including all extra features.
         protected decimal costPerFeatureDecimal = 10;       // Standard cost per most features.
@@ -59,20 +59,20 @@ namespace cis237assignment3
 
         public string Material
         {
-            set { materialString = value; }
-            get { return materialString; }
+            set { selectedMaterialString = value; }
+            get { return selectedMaterialString; }
         }
 
         public string Model
         {
-            set { modelString = value; }
-            get { return modelString; }
+            set { selectedModelString = value; }
+            get { return selectedModelString; }
         }
 
         public string Color
         {
-            set { colorString = value; }
-            get { return colorString; }
+            set { selectedColorString = value; }
+            get { return selectedColorString; }
         }
 
         public decimal BaseCost
@@ -112,12 +112,17 @@ namespace cis237assignment3
         public abstract void CalculateTotalCost();
 
         /// <summary>
+        /// Calculates individual feature costs of droid.
+        /// </summary>
+        public abstract void CalculateFeatures();
+
+        /// <summary>
         /// Shortened string for displaying of many droids, each in single line format.
         /// </summary>
         /// <returns>Single ine formatted for list of droids.</returns>
         public virtual string DisplayShortToString()
         {
-            return (materialString + " ").PadRight(10) + (modelString + " - ").PadRight(10) + colorString.PadRight(10) + totalCostDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
+            return (selectedMaterialString + " ").PadRight(11) + (selectedModelString + " ").PadRight(10) + (selectedColorString + " ").PadRight(10) + totalCostDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         /// <summary>

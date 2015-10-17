@@ -52,8 +52,6 @@ namespace cis237assignment3
         {
             NumberOfLanguages = numberOfLanguages;
             numberOfItemsInt = 4;
-
-            CreateDroid();
         }
 
         #endregion
@@ -88,13 +86,13 @@ namespace cis237assignment3
 
         #region Protected methods
 
-        protected override void CreateDroid()
+        /// <summary>
+        /// Creates string for droid type. Needed due to how inheritance works.
+        /// </summary>
+        /// <returns>String of droid's type.</returns>
+        protected override string TypeString()
         {
-            base.CreateDroid();
-
-            CalculateLanguageCost();
-
-            CalculateTotalCost();
+            return "Protocol ";
         }
 
         #endregion
@@ -113,12 +111,13 @@ namespace cis237assignment3
         }
 
         /// <summary>
-        /// Shortened string for displaying of many droids, each in single line format.
+        /// Calculates individual feature costs of droid.
         /// </summary>
-        /// <returns>Single ine formatted for list of droids.</returns>
-        public override string DisplayShortToString()
+        public override void CalculateFeatures()
         {
-            return "Protocol ".PadRight(10) + base.DisplayShortToString();
+            base.CalculateFeatures();
+
+            CalculateLanguageCost();
         }
 
         /// <summary>
@@ -128,7 +127,7 @@ namespace cis237assignment3
         public override string DisplayLongToString()
         {
             return base.DisplayLongToString() +
-                "".PadRight(5) + ("Languages: " + numberOfLanguagesInt).PadRight(30) + totalLanguageDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
+                "".PadRight(5) + "Languages: ".PadRight(25) + numberOfLanguagesInt.ToString().PadRight(17) + totalLanguageDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         #endregion

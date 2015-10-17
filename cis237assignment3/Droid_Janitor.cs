@@ -53,8 +53,6 @@ namespace cis237assignment3
             HasTrashCompactor = hasTrashCompactor;
             HasVacuum = hasVacuum;
             numberOfItemsInt = 8;
-
-            CreateDroid();
         }
 
         #endregion
@@ -111,14 +109,13 @@ namespace cis237assignment3
 
         #region Protected Methods
 
-        protected override void CreateDroid()
+        /// <summary>
+        /// Creates string for droid type. Needed due to how inheritance works.
+        /// </summary>
+        /// <returns>String of droid's type.</returns>
+        protected override string TypeString()
         {
-            base.CreateDroid();
-
-            CalculateTrashCompactorCost();
-            CalculateVacuumCost();
-
-            CalculateTotalCost();
+            return "Janitor ";
         }
 
         #endregion
@@ -137,12 +134,14 @@ namespace cis237assignment3
         }
 
         /// <summary>
-        /// Shortened string for displaying of many droids, each in single line format.
+        /// Calculates individual feature costs of droid.
         /// </summary>
-        /// <returns>Single ine formatted for list of droids.</returns>
-        public override string DisplayShortToString()
+        public override void CalculateFeatures()
         {
-            return "Janitor ".PadRight(10) + base.DisplayShortToString();
+            base.CalculateFeatures();
+
+            CalculateTrashCompactorCost();
+            CalculateVacuumCost();
         }
 
         /// <summary>
@@ -151,9 +150,9 @@ namespace cis237assignment3
         /// <returns>Full information regarding single droid.</returns>
         public override string DisplayLongToString()
         {
-            return base.DisplayLongToString() + Environment.NewLine +
-                "".PadRight(5) + ("Trash Compactor: " + YesNoString(hasTrashCompactorBool)).PadRight(30) + trashCompactorDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
-                "".PadRight(5) + ("Vacuum: " + YesNoString(hasVacuumBool)).PadRight(30) + vacuumDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
+            return base.DisplayLongToString() +
+                "".PadRight(5) + "Trash Compactor: ".PadRight(25) + YesNoString(hasTrashCompactorBool).PadRight(17) + trashCompactorDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
+                "".PadRight(5) + "Vacuum: ".PadRight(25) + YesNoString(hasVacuumBool).PadRight(17) + vacuumDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         #endregion

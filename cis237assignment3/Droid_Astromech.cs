@@ -53,8 +53,6 @@ namespace cis237assignment3
             HasFireExtinguisher = hasFireExtinguisher;
             NumberOfShips = numberOfShips;
             numberOfItemsInt = 8;
-
-            CreateDroid();
         }
 
         #endregion
@@ -95,8 +93,7 @@ namespace cis237assignment3
 
         private void CalculateNumberOfShipsCost()
         {
-            CalculateTotalCost();
-            numberOfShipsDecimal = totalCostDecimal * numberOfItemsInt;
+            numberOfShipsDecimal = numberOfShipsInt * costPerFeatureDecimal;
         }
 
         #endregion
@@ -105,13 +102,13 @@ namespace cis237assignment3
 
         #region Protected Methods
 
-        protected override void CreateDroid()
+        /// <summary>
+        /// Creates string for droid type. Needed due to how inheritance works.
+        /// </summary>
+        /// <returns>String of droid's type.</returns>
+        protected override string TypeString()
         {
-            base.CreateDroid();
-
-            CalculateFireExtinguisherCost();
-            CalculateNumberOfShipsCost();
-            CalculateTotalCost();
+            return "Astromech ";
         }
 
         #endregion
@@ -126,16 +123,18 @@ namespace cis237assignment3
         public override void CalculateTotalCost()
         {
             base.CalculateTotalCost();
-            totalCostDecimal += fireExtinguisherDecimal;
+            totalCostDecimal += fireExtinguisherDecimal + numberOfShipsDecimal;
         }
 
         /// <summary>
-        /// Shortened string for displaying of many droids, each in single line format.
+        /// Calculates individual feature costs of droid.
         /// </summary>
-        /// <returns>Single ine formatted for list of droids.</returns>
-        public override string DisplayShortToString()
+        public override void CalculateFeatures()
         {
-            return "Astromech ".PadRight(10) + base.DisplayShortToString();
+            base.CalculateFeatures();
+
+            CalculateFireExtinguisherCost();
+            CalculateNumberOfShipsCost();
         }
 
         /// <summary>
@@ -144,9 +143,9 @@ namespace cis237assignment3
         /// <returns>Full information regarding single droid.</returns>
         public override string DisplayLongToString()
         {
-            return base.DisplayLongToString() + Environment.NewLine +
-                "".PadRight(5) + ("Fire Extinguisher: " + YesNoString(hasFireExtinguisherBool)).PadRight(30) + fireExtinguisherDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
-                "".PadRight(5) + ("Outfitting onto " + numberOfItemsInt + " different ships.").PadRight(30) + numberOfShipsDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
+            return base.DisplayLongToString() +
+                "".PadRight(5) + "Fire Extinguisher: ".PadRight(25) + YesNoString(hasFireExtinguisherBool).PadRight(17) + fireExtinguisherDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
+                "".PadRight(5) + ("Outfitted for " + numberOfShipsInt + " ships.").PadRight(42) + numberOfShipsDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         #endregion
