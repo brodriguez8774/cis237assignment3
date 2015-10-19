@@ -1,11 +1,18 @@
 # Assignment 3 - Inheritance, Abstract Classes, Interfaces, and Polymorphism
-## Due: 10-20-2015
 
 ## Author
 
+Brandon Rodriguez
 
+## Descritpion
 
-## Description
+This program is a fairly simple interface which allows a customer to purchase droids, using concepts of inheritance.
+
+The user can select from four types of droids and select from varying features for each type. Once chosen, the user can display either a receipt of all droids bought or the full information about a single droid. Also has the option to clear out data for new customer.
+
+Currently, all features are set to basically cost the same price.
+
+## Project Requirements
 
 The Jawas on Tatooine have recently opened a droid factory and they want to hire you to write a program to hold a list of the available droids, and the price of each droid. The price is based on the type: (protocol, utility, janitor, or astromech), the material used and the options selected by the Jawa creating the list.
 
@@ -101,3 +108,6 @@ https://msdn.microsoft.com/en-us/library/hfw7t1ce.aspx
 * Figured out how to use base in a void override method.
 
 ## Known Problems, Issues, And/Or Errors in the Program
+
+All features use the same price, essentially. Should the program need to be expanded for variation of prices, consider using commit 1e70e60 as the base.
+
