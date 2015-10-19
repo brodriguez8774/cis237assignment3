@@ -16,13 +16,36 @@ namespace cis237assignment3
     {
         #region Variables
 
-        protected string selectedMaterialString;
-        protected string selectedModelString;
-        protected string selectedColorString;
         protected decimal baseCostDecimal;                  // Cost of droid before any extra features. IE, just the material, model, and color cost.
         protected decimal totalCostDecimal;                 // Full cost of droid, including all extra features.
         protected decimal costPerFeatureDecimal = 10;       // Standard cost per most features.
         protected int numberOfItemsInt;                     // Number of individual items influencing droid price.
+
+
+        // All the necessary variables for material selection.
+        protected string selectedMaterialString;
+        private decimal selectedMaterialDecimal;
+        public static string MATERIAL_1_STRING = "Tin";
+        public static string MATERIAL_2_STRING = "Steel";
+        public static string MATERIAL_3_STRING = "Titanium";
+        public static string MATERIAL_4_STRING = "Mythril";
+        public static string MATERIAL_5_STRING = "Unobtanium";
+
+        // All the necessary variables for model selection.
+        protected string selectedModelString;
+        protected decimal selectedModelDecimal;
+        public static string MODEL_1_STRING = "TI-84";
+        public static string MODEL_2_STRING = "CAT5";
+        public static string MODEL_3_STRING = "M7";
+
+        // All the necessary variables for color selection.
+        protected string selectedColorString;
+        private decimal selectedColorDecimal;
+        public static string COLOR_1_STRING = "White";
+        public static string COLOR_2_STRING = "Black";
+        public static string COLOR_3_STRING = "Blue";
+        public static string COLOR_4_STRING = "Red";
+        public static string COLOR_5_STRING = "Green";
 
         #endregion
 
@@ -98,7 +121,11 @@ namespace cis237assignment3
 
         #region Protected Methods
 
-        
+        /// <summary>
+        /// Creates string for droid type. Needed due to how inheritance works.
+        /// </summary>
+        /// <returns>String of droid's type.</returns>
+        protected abstract string TypeString();
 
         #endregion
 
@@ -109,12 +136,31 @@ namespace cis237assignment3
         /// <summary>
         /// Calculates total cost of droid.
         /// </summary>
-        public abstract void CalculateTotalCost();
+        public virtual void CalculateTotalCost()
+        {
+            totalCostDecimal = baseCostDecimal;
+        }
+
+        /// <summary>
+        /// Determines the base cost of a droid. This is the cost of the droid minus any additional features.
+        /// IE, only the cost in regards to the model, material, and color.
+        /// </summary>
+        public void CalculateBaseCost()
+        {
+            baseCostDecimal = selectedModelDecimal + selectedMaterialDecimal + selectedColorDecimal;
+        }
 
         /// <summary>
         /// Calculates individual feature costs of droid.
         /// </summary>
-        public abstract void CalculateFeatures();
+        public virtual void CalculateFeatures()
+        {
+            selectedModelDecimal = 10;
+            selectedMaterialDecimal = 10;
+            selectedColorDecimal = 10;
+
+            CalculateBaseCost();
+        }
 
         /// <summary>
         /// Shortened string for displaying of many droids, each in single line format.
@@ -122,14 +168,19 @@ namespace cis237assignment3
         /// <returns>Single ine formatted for list of droids.</returns>
         public virtual string DisplayShortToString()
         {
-            return (selectedMaterialString + " ").PadRight(11) + (selectedModelString + " ").PadRight(10) + (selectedColorString + " ").PadRight(10) + totalCostDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
+            return TypeString().PadRight(11) + (selectedMaterialString + " ").PadRight(11) + (selectedModelString + " ").PadRight(10) + (selectedColorString + " ").PadRight(10) + totalCostDecimal.ToString("C").PadLeft(10) + Environment.NewLine;
         }
 
         /// <summary>
         /// Full string for displaying of single droid spanning multiple lines.
         /// </summary>
         /// <returns>Full information regarding single droid.</returns>
-        public abstract string DisplayLongToString();
+        public virtual string DisplayLongToString()
+        {
+            return "".PadRight(5) + TypeString().PadRight(11) + (selectedMaterialString + " ").PadRight(11) + (selectedModelString + " ").PadRight(10) + selectedColorString.PadRight(10) + baseCostDecimal.ToString("C").PadLeft(10) + Environment.NewLine +
+                Environment.NewLine +
+                Environment.NewLine;
+        }
 
         #endregion
 

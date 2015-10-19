@@ -12,7 +12,7 @@ namespace cis237assignment3
     /// Class for Droids of type Utility.
     /// Inherits only from Droid.
     /// </summary>
-    class Droid_Utility : Droid_Generic
+    class Droid_Utility : Droid
     {
         #region Variables
 

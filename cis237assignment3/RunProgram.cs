@@ -414,19 +414,19 @@ namespace cis237assignment3
         /// </summary>
         private void ModelSelection()
         {
-            UserInterface.Menus.DisplayModelSelectionMenu(Droid_Generic.MODEL_1_STRING, Droid_Generic.MODEL_2_STRING, Droid_Generic.MODEL_3_STRING);
+            UserInterface.Menus.DisplayModelSelectionMenu(Droid.MODEL_1_STRING, Droid.MODEL_2_STRING, Droid.MODEL_3_STRING);
             userInputString = UserInterface.GetUserInput();
 
             switch (userInputString)
             {
                 case "1":
-                    selectedModelString = Droid_Generic.MODEL_1_STRING;
+                    selectedModelString = Droid.MODEL_1_STRING;
                     break;
                 case "2":
-                    selectedModelString = Droid_Generic.MODEL_2_STRING;
+                    selectedModelString = Droid.MODEL_2_STRING;
                     break;
                 case "3":
-                    selectedModelString = Droid_Generic.MODEL_3_STRING;
+                    selectedModelString = Droid.MODEL_3_STRING;
                     break;
                 case "esc":
                     UserInterface.ClearDisplayLine();
@@ -444,25 +444,25 @@ namespace cis237assignment3
         /// </summary>
         private void MaterialSelection()
         {
-            UserInterface.Menus.DisplayMaterialSelectionMenu(Droid_Generic.MATERIAL_1_STRING, Droid_Generic.MATERIAL_2_STRING, Droid_Generic.MATERIAL_3_STRING, Droid_Generic.MATERIAL_4_STRING, Droid_Generic.MATERIAL_5_STRING);
+            UserInterface.Menus.DisplayMaterialSelectionMenu(Droid.MATERIAL_1_STRING, Droid.MATERIAL_2_STRING, Droid.MATERIAL_3_STRING, Droid.MATERIAL_4_STRING, Droid.MATERIAL_5_STRING);
             userInputString = UserInterface.GetUserInput();
 
             switch (userInputString)
             {
                 case "1":
-                    selectedMaterialString = Droid_Generic.MATERIAL_1_STRING;
+                    selectedMaterialString = Droid.MATERIAL_1_STRING;
                     break;
                 case "2":
-                    selectedMaterialString = Droid_Generic.MATERIAL_2_STRING;
+                    selectedMaterialString = Droid.MATERIAL_2_STRING;
                     break;
                 case "3":
-                    selectedMaterialString = Droid_Generic.MATERIAL_3_STRING;
+                    selectedMaterialString = Droid.MATERIAL_3_STRING;
                     break;
                 case "4":
-                    selectedMaterialString = Droid_Generic.MATERIAL_4_STRING;
+                    selectedMaterialString = Droid.MATERIAL_4_STRING;
                     break;
                 case "5":
-                    selectedMaterialString = Droid_Generic.MATERIAL_5_STRING;
+                    selectedMaterialString = Droid.MATERIAL_5_STRING;
                     break;
                 case "esc":
                     UserInterface.ClearDisplayLine();
@@ -480,25 +480,25 @@ namespace cis237assignment3
         /// </summary>
         private void ColorSelection()
         {
-            UserInterface.Menus.DisplayColorSelectionMenu(Droid_Generic.COLOR_1_STRING, Droid_Generic.COLOR_2_STRING, Droid_Generic.COLOR_3_STRING, Droid_Generic.COLOR_4_STRING, Droid_Generic.COLOR_5_STRING);
+            UserInterface.Menus.DisplayColorSelectionMenu(Droid.COLOR_1_STRING, Droid.COLOR_2_STRING, Droid.COLOR_3_STRING, Droid.COLOR_4_STRING, Droid.COLOR_5_STRING);
             userInputString = UserInterface.GetUserInput();
 
             switch (userInputString)
             {
                 case "1":
-                    selectedColorString = Droid_Generic.COLOR_1_STRING;
+                    selectedColorString = Droid.COLOR_1_STRING;
                     break;
                 case "2":
-                    selectedColorString = Droid_Generic.COLOR_2_STRING;
+                    selectedColorString = Droid.COLOR_2_STRING;
                     break;
                 case "3":
-                    selectedColorString = Droid_Generic.COLOR_3_STRING;
+                    selectedColorString = Droid.COLOR_3_STRING;
                     break;
                 case "4":
-                    selectedColorString = Droid_Generic.COLOR_4_STRING;
+                    selectedColorString = Droid.COLOR_4_STRING;
                     break;
                 case "5":
-                    selectedColorString = Droid_Generic.COLOR_5_STRING;
+                    selectedColorString = Droid.COLOR_5_STRING;
                     break;
                 case "esc":
                     UserInterface.ClearDisplayLine();

@@ -32,7 +32,7 @@ namespace cis237assignment3
         {
             droidListSizeInt = 0;
             lenghtOfArrayInt = 10;
-            droidCollection = new Droid_Generic[lenghtOfArrayInt];
+            droidCollection = new Droid[lenghtOfArrayInt];
         }
 
         #endregion
@@ -64,7 +64,7 @@ namespace cis237assignment3
         {
             // Set list size to be one and a half times the size of current.
             lenghtOfArrayInt = droidListSizeInt + (droidListSizeInt / 2);
-            tempArray = new Droid_Generic[lenghtOfArrayInt];
+            tempArray = new Droid[lenghtOfArrayInt];
 
             indexInt = 0;
             // While not through entire list of droids yet.

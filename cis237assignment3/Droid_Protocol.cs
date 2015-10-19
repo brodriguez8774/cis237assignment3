@@ -12,7 +12,7 @@ namespace cis237assignment3
     /// Class for Droids of type Protocol.
     /// Inherits only from Droid.
     /// </summary>
-    class Droid_Protocol : Droid_Generic
+    class Droid_Protocol : Droid
     {
         #region Variables
 
